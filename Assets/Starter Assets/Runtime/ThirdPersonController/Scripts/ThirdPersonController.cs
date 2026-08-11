@@ -126,9 +126,30 @@ namespace StarterAssets
         private void Awake()
         {
             // get a reference to our main camera
-            if (_mainCamera == null)
+            EnsureMainCameraReference();
+        }
+
+        private void EnsureMainCameraReference()
+        {
+            if (_mainCamera != null)
             {
-                _mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
+                return;
+            }
+
+            // Camera.main is more reliable than FindGameObjectWithTag: it uses
+            // Unity's cached "MainCamera" tag lookup and re-resolves if the
+            // previously cached camera was destroyed/disabled.
+            if (Camera.main != null)
+            {
+                _mainCamera = Camera.main.gameObject;
+            }
+            else
+            {
+                Debug.LogError(
+                    "ThirdPersonController: No active camera tagged 'MainCamera' was found in the scene. " +
+                    "If you're using Cinemachine, make sure the object holding your Camera + CinemachineBrain " +
+                    "components (NOT the Virtual Camera) is tagged 'MainCamera' and is active in the hierarchy.",
+                    this);
             }
         }
 
@@ -213,6 +234,19 @@ namespace StarterAssets
 
         private void Move()
         {
+            // make sure we still have a valid camera reference (handles cases where
+            // the main camera was swapped/disabled/re-enabled after Awake ran)
+            if (_mainCamera == null)
+            {
+                EnsureMainCameraReference();
+                if (_mainCamera == null)
+                {
+                    // still nothing to reference this frame — skip rotation-by-camera
+                    // logic rather than throwing a NullReferenceException
+                    return;
+                }
+            }
+
             // set target speed based on move speed, sprint speed and if sprint is pressed
             float targetSpeed = _input.sprint ? SprintSpeed : MoveSpeed;
 
