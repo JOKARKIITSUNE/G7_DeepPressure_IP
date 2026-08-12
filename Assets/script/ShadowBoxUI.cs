@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,11 +18,11 @@ namespace MiniGames
         [SerializeField] private GameObject minigameRoot;
 
         [Header("Role & round labels")]
-        [SerializeField] private Text playerRoleText;
-        [SerializeField] private Text botRoleText;
-        [SerializeField] private Text roundNumberText;
-        [SerializeField] private Text statusText;
-        [SerializeField] private Text revealText;
+        [SerializeField] private TMP_Text playerRoleText;
+        [SerializeField] private TMP_Text botRoleText;
+        [SerializeField] private TMP_Text roundNumberText;
+        [SerializeField] private TMP_Text statusText;
+        [SerializeField] private TMP_Text revealText;
 
         [Header("Strike pips (assign exactly strikesToLose images each)")]
         [SerializeField] private Image[] playerStrikePips;
@@ -37,7 +38,7 @@ namespace MiniGames
 
         [Header("Win panel")]
         [SerializeField] private GameObject winPanel;
-        [SerializeField] private Text winText;
+        [SerializeField] private TMP_Text winText;
         [SerializeField] private Button restartButton;
 
         private void Awake()
