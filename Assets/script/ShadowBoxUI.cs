@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace MiniGames
@@ -36,10 +37,23 @@ namespace MiniGames
         [SerializeField] private Button leftButton;
         [SerializeField] private Button rightButton;
 
+        [Header("Sound cues")]
+        [SerializeField] private AudioSource audioSource;
+        [Tooltip("Played when a round resolves as a match (a strike lands, either side)")]
+        [SerializeField] private AudioClip correctClip;
+        [Tooltip("Played when a round resolves as a miss (roles flip)")]
+        [SerializeField] private AudioClip wrongClip;
+
         [Header("Win panel")]
         [SerializeField] private GameObject winPanel;
         [SerializeField] private TMP_Text winText;
         [SerializeField] private Button restartButton;
+
+        [Tooltip("Optional: button on the win panel that continues to the next part of the game instead of restarting")]
+        [SerializeField] private Button continueButton;
+
+        [Tooltip("Scene to load when Continue is pressed. Leave blank if you don't want an automatic scene change.")]
+        [SerializeField] private string nextSceneName;
 
         private void Awake()
         {
@@ -48,6 +62,7 @@ namespace MiniGames
             if (leftButton != null) leftButton.onClick.AddListener(() => game.CaptureInput(PunchDirection.Left));
             if (rightButton != null) rightButton.onClick.AddListener(() => game.CaptureInput(PunchDirection.Right));
             if (restartButton != null) restartButton.onClick.AddListener(Restart);
+            if (continueButton != null) continueButton.onClick.AddListener(ContinueToNextScene);
         }
 
         private void OnEnable()
@@ -107,6 +122,12 @@ namespace MiniGames
             UpdateRoleLabels();
             UpdatePips();
             if (roundNumberText != null) roundNumberText.text = "round " + game.RoundNumber;
+            PlayCue(wasHit ? correctClip : wrongClip);
+        }
+
+        private void PlayCue(AudioClip clip)
+        {
+            if (audioSource != null && clip != null) audioSource.PlayOneShot(clip);
         }
 
         private void HandleStrikeTaken(Actor struckActor)
@@ -130,6 +151,19 @@ namespace MiniGames
             if (statusText != null) statusText.text = string.Empty;
             if (winPanel != null) winPanel.SetActive(true);
             if (winText != null) winText.text = winner == Actor.Player ? "you win!" : "bot wins";
+
+            // Keep the outcome around as a variable other scripts/scenes can read.
+            ShadowBoxResult.Set(winner);
+        }
+
+        private void ContinueToNextScene()
+        {
+            if (string.IsNullOrEmpty(nextSceneName))
+            {
+                Debug.LogWarning("ShadowBoxUI: Continue pressed but Next Scene Name is empty.");
+                return;
+            }
+            SceneManager.LoadScene(nextSceneName);
         }
 
         private void UpdateRoleLabels()
