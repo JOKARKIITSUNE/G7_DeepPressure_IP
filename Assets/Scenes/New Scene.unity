@@ -306,9 +306,14 @@ MonoBehaviour:
   downButton: {fileID: 2103458873}
   leftButton: {fileID: 376555892}
   rightButton: {fileID: 464035695}
+  audioSource: {fileID: 0}
+  correctClip: {fileID: 0}
+  wrongClip: {fileID: 0}
   winPanel: {fileID: 671478647}
   winText: {fileID: 1433118884}
   restartButton: {fileID: 224683651}
+  continueButton: {fileID: 0}
+  nextSceneName: 
 --- !u!4 &136439033
 Transform:
   m_ObjectHideFlags: 0
@@ -1411,7 +1416,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &651533561
 MonoBehaviour:
   m_ObjectHideFlags: 0
