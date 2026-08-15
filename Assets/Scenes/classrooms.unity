@@ -170,7 +170,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bafa3e914035694eb49db1c0ece3abc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CrimeGame.TaskPanelUI
-  panelRoot: {fileID: 0}
+  panelRoot: {fileID: 63905098}
   taskText: {fileID: 209432301}
 --- !u!114 &63905101
 MonoBehaviour:
