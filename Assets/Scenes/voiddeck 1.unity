@@ -1125,6 +1125,73 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 90.089, z: 0}
+--- !u!1 &675088453
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 675088455}
+  - component: {fileID: 675088454}
+  m_Layer: 0
+  m_Name: crime controller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &675088454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 675088453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33cd6e591afcf184aae6dc584bc318aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CrimeGame.CrimeDecisionController
+  crimeType: 0
+  promptText: theres a unattened bag should we still their wallet?
+  choiceDialogue: {fileID: 1111345522}
+  minigameUI: {fileID: 1124961075}
+  minigameGame: {fileID: 1124961074}
+  hardModeBotSkill: 0.8
+  hardModeStrikesToLose: 3
+  resultDisplayDelay: 1.2
+  onDecisionComplete:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!4 &675088455
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 675088453}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 486.69662, y: 170.68796, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &785401712
 GameObject:
   m_ObjectHideFlags: 0
@@ -1384,6 +1451,7 @@ GameObject:
   - component: {fileID: 1111345520}
   - component: {fileID: 1111345519}
   - component: {fileID: 1111345518}
+  - component: {fileID: 1111345522}
   m_Layer: 5
   m_Name: game ui
   m_TagString: Untagged
@@ -1474,6 +1542,22 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1111345522
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1111345517}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b4b205d40a8759459d19d7aa0c1b209, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CrimeGame.ChoiceDialogueUI
+  panelRoot: {fileID: 327066188}
+  promptText: {fileID: 1804121074}
+  yesButton: {fileID: 943043515}
+  noButton: {fileID: 1396063142}
 --- !u!1001 &1124961073
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1531,6 +1615,28 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cd15b6946ca959842bc395d7e2621b03, type: 3}
+--- !u!114 &1124961074 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4250863715227319255, guid: cd15b6946ca959842bc395d7e2621b03, type: 3}
+  m_PrefabInstance: {fileID: 1124961073}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f15a4240ae50e9b4c953a7a2a237ef3b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MiniGames.ShadowBoxGame
+--- !u!114 &1124961075 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 466979744742938959, guid: cd15b6946ca959842bc395d7e2621b03, type: 3}
+  m_PrefabInstance: {fileID: 1124961073}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6df84ccb3d349eb4ba8dbd491304d874, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MiniGames.ShadowBoxUI
 --- !u!1 &1396063140
 GameObject:
   m_ObjectHideFlags: 0
@@ -2060,7 +2166,7 @@ GameObject:
   - component: {fileID: 1804121075}
   - component: {fileID: 1804121074}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: prompt text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2316,3 +2422,4 @@ SceneRoots:
   - {fileID: 623308277}
   - {fileID: 1111345521}
   - {fileID: 1124961073}
+  - {fileID: 675088455}
