@@ -152,12 +152,12 @@ GameObject:
   - component: {fileID: 445163211}
   - component: {fileID: 445163210}
   m_Layer: 5
-  m_Name: Image
+  m_Name: badge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &445163209
 RectTransform:
   m_ObjectHideFlags: 0
@@ -771,7 +771,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc378224d4cc97941b9fa47a6522441c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CrimeGame.MainMenuUI
-  isPauseMenu: 1
+  isPauseMenu: 0
   menuRoot: {fileID: 1069546960}
   mainButtonsPanel: {fileID: 636083540}
   optionsPanel: {fileID: 2076568937}
@@ -792,7 +792,7 @@ MonoBehaviour:
   validCodes:
   - test
   - SAFE-2026-DELTA
-  crownIcon: {fileID: 0}
+  crownIcon: {fileID: 445163208}
   firstSceneName: classrooms
   titleSceneName: MainMenu
 --- !u!1660057539 &9223372036854775807
