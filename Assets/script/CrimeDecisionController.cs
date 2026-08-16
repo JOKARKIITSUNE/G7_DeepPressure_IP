@@ -40,6 +40,18 @@ namespace CrimeGame
         [Tooltip("How long to leave the win/lose result on screen before continuing")]
         [SerializeField] private float resultDisplayDelay = 1.2f;
 
+        [Header("Resistance win follow-up")]
+        [SerializeField] private DialogueLineUI resistanceWinDialogueUI;
+        [SerializeField] private NPCInteract initiatingNpcInteraction;
+        [SerializeField] private string resistanceWinSpeaker = "Jaiden";
+        [TextArea]
+        [SerializeField] private string[] resistanceWinDialogueLines =
+        {
+            "Ok, nevermind, I'll catch up with you later."
+        };
+        [SerializeField] private string resistanceWinTask = "Go home.";
+        [SerializeField] private GameObject exitTriggerAfterResistanceWin;
+
         [Tooltip("Fires once the decision is fully resolved (crime marked or avoided), so the scene can continue dialogue/movement")]
         public UnityEvent onDecisionComplete;
 
@@ -98,6 +110,39 @@ namespace CrimeGame
             if (winner == MiniGames.Actor.Bot)
             {
                 MarkCrime();
+                onDecisionComplete?.Invoke();
+                yield break;
+            }
+
+            ShowResistanceWinFollowUp();
+        }
+
+        private void ShowResistanceWinFollowUp()
+        {
+            if (initiatingNpcInteraction != null) initiatingNpcInteraction.enabled = false;
+
+            if (resistanceWinDialogueUI != null)
+            {
+                resistanceWinDialogueUI.ShowLines(
+                    resistanceWinSpeaker,
+                    resistanceWinDialogueLines,
+                    CompleteResistanceWinFollowUp);
+                return;
+            }
+
+            CompleteResistanceWinFollowUp();
+        }
+
+        private void CompleteResistanceWinFollowUp()
+        {
+            if (TaskPanelUI.Instance != null)
+            {
+                TaskPanelUI.Instance.SetTask(resistanceWinTask);
+            }
+
+            if (exitTriggerAfterResistanceWin != null)
+            {
+                exitTriggerAfterResistanceWin.SetActive(true);
             }
 
             onDecisionComplete?.Invoke();

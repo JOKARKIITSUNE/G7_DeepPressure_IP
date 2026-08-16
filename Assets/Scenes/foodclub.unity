@@ -2548,6 +2548,34 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 4831259535551032430, guid: bd74d6ceb38089f45b4e6929fd7504a5, type: 3}
+      propertyPath: resistanceWinDialogueUI
+      value:
+      objectReference: {fileID: 917794059}
+    - target: {fileID: 4831259535551032430, guid: bd74d6ceb38089f45b4e6929fd7504a5, type: 3}
+      propertyPath: initiatingNpcInteraction
+      value:
+      objectReference: {fileID: 16402018}
+    - target: {fileID: 4831259535551032430, guid: bd74d6ceb38089f45b4e6929fd7504a5, type: 3}
+      propertyPath: resistanceWinSpeaker
+      value: Jaiden
+      objectReference: {fileID: 0}
+    - target: {fileID: 4831259535551032430, guid: bd74d6ceb38089f45b4e6929fd7504a5, type: 3}
+      propertyPath: resistanceWinDialogueLines.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4831259535551032430, guid: bd74d6ceb38089f45b4e6929fd7504a5, type: 3}
+      propertyPath: 'resistanceWinDialogueLines.Array.data[0]'
+      value: Ok, nevermind, I'll catch up with you later.
+      objectReference: {fileID: 0}
+    - target: {fileID: 4831259535551032430, guid: bd74d6ceb38089f45b4e6929fd7504a5, type: 3}
+      propertyPath: resistanceWinTask
+      value: Go home.
+      objectReference: {fileID: 0}
+    - target: {fileID: 4831259535551032430, guid: bd74d6ceb38089f45b4e6929fd7504a5, type: 3}
+      propertyPath: exitTriggerAfterResistanceWin
+      value:
+      objectReference: {fileID: 537385834}
+    - target: {fileID: 4831259535551032430, guid: bd74d6ceb38089f45b4e6929fd7504a5, type: 3}
       propertyPath: minigameUI
       value: 
       objectReference: {fileID: 466979745569166080}
