@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6530552082931899637}
   - component: {fileID: 4831259535551032430}
   m_Layer: 0
-  m_Name: crime controller
+  m_Name: Crime Controller
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 5516275000579762621}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 486.69662, y: 170.68796, z: 0}
+  m_LocalPosition: {x: 40621.66, y: 98.48708, z: -16525.42}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &9014851731640505729
+--- !u!1 &6317520671513671621
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,38 +8,38 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 9105976860259391085}
-  - component: {fileID: 6696934764492263405}
-  - component: {fileID: 3511943687695729961}
+  - component: {fileID: 3982752595604707991}
+  - component: {fileID: 7813031621212002506}
+  - component: {fileID: 6539563157940111334}
   m_Layer: 0
-  m_Name: door trigger
+  m_Name: Door Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &9105976860259391085
+--- !u!4 &3982752595604707991
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9014851731640505729}
+  m_GameObject: {fileID: 6317520671513671621}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 24610.52, y: 0.489, z: -22509.545}
+  m_LocalPosition: {x: 40530.97, y: 0.40304798, z: -16461.984}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &6696934764492263405
+--- !u!65 &7813031621212002506
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9014851731640505729}
+  m_GameObject: {fileID: 6317520671513671621}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -52,20 +52,20 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.9394531, y: 8.1589, z: 9.599609}
-  m_Center: {x: 2.165039, y: 3.5794497, z: -3.538086}
---- !u!114 &3511943687695729961
+  m_Size: {x: 0.9394531, y: 6.3352046, z: 4.1484375}
+  m_Center: {x: 2.165039, y: 2.6676023, z: -1.6132812}
+--- !u!114 &6539563157940111334
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9014851731640505729}
+  m_GameObject: {fileID: 6317520671513671621}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3662d8b9ed6586e4291db80f475a6347, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CrimeGame.LevelExitTrigger
-  nextSceneName: voiddeck2
+  nextSceneName: foodclub
   playerTag: Player
   interactPrompt: {fileID: 0}

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6955940672111477345}
   - component: {fileID: 7282617246737732752}
   m_Layer: 5
-  m_Name: yes
+  m_Name: Yes Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -132,7 +132,7 @@ GameObject:
   - component: {fileID: 8897558404768581617}
   - component: {fileID: 8636337531314397061}
   m_Layer: 5
-  m_Name: prompt text
+  m_Name: PromptText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -212,15 +212,15 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_characterHorizontalScale: 1
@@ -270,7 +270,7 @@ GameObject:
   - component: {fileID: 4634585840330103771}
   - component: {fileID: 3976743368115968206}
   m_Layer: 5
-  m_Name: no
+  m_Name: No Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -414,8 +414,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -108.95536}
-  m_SizeDelta: {x: 0, y: -217.9107}
+  m_AnchoredPosition: {x: -2.574585, y: -164.30841}
+  m_SizeDelta: {x: -272.9036, y: -403.2793}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3686808693908034742
 CanvasRenderer:
@@ -469,7 +469,7 @@ GameObject:
   - component: {fileID: 6585476645776563347}
   - component: {fileID: 7180020021518691913}
   m_Layer: 5
-  m_Name: choice ui
+  m_Name: ChoiceUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
