@@ -19,12 +19,19 @@ namespace CrimeGame
         [Tooltip("Optional bag model to hide after it has been stolen")]
         [SerializeField] private GameObject bagVisual;
 
+        [Header("Post-theft story")]
+        [SerializeField] private NPCInteract initialJaidenInteraction;
+        [SerializeField] private NPCInteract postTheftJaidenInteraction;
+        [SerializeField] private string postTheftTask = "Talk to Jaiden.";
+        [SerializeField] private string goHomeTask = "Go home.";
+
         private bool _playerInRange;
         private bool _stolen;
 
         private void Start()
         {
             if (interactPrompt != null) interactPrompt.SetActive(false);
+            if (postTheftJaidenInteraction != null) postTheftJaidenInteraction.enabled = false;
         }
 
         private void Update()
@@ -45,7 +52,17 @@ namespace CrimeGame
                 if (interactPrompt != null) interactPrompt.SetActive(false);
                 theftDecision.CompleteCrimeAction();
                 if (bagVisual != null) bagVisual.SetActive(false);
+
+                if (initialJaidenInteraction != null) initialJaidenInteraction.enabled = false;
+                if (postTheftJaidenInteraction != null) postTheftJaidenInteraction.enabled = true;
+                if (TaskPanelUI.Instance != null) TaskPanelUI.Instance.SetTask(postTheftTask);
             }
+        }
+
+        public void SetGoHomeTask()
+        {
+            if (postTheftJaidenInteraction != null) postTheftJaidenInteraction.enabled = false;
+            if (TaskPanelUI.Instance != null) TaskPanelUI.Instance.SetTask(goHomeTask);
         }
 
         private void OnTriggerEnter(Collider other)
