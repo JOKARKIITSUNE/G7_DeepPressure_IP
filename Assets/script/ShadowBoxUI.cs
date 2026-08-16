@@ -107,21 +107,21 @@ namespace MiniGames
         private void HandleRoundStarted()
         {
             if (revealText != null) revealText.text = string.Empty;
-            if (statusText != null) statusText.text = "your move";
+            if (statusText != null) statusText.text = "Your move";
             UpdateRoleLabels();
             UpdatePips();
-            if (roundNumberText != null) roundNumberText.text = "round " + game.RoundNumber;
+            if (roundNumberText != null) roundNumberText.text = "Round " + game.RoundNumber;
         }
 
         private void HandleRoundResolved(PunchDirection playerDir, PunchDirection botDir, bool wasHit)
         {
             if (revealText != null)
             {
-                revealText.text = "you: " + Arrow(playerDir) + "    bot: " + Arrow(botDir);
+                revealText.text = "You: " + Arrow(playerDir) + "    Bot: " + Arrow(botDir);
             }
             UpdateRoleLabels();
             UpdatePips();
-            if (roundNumberText != null) roundNumberText.text = "round " + game.RoundNumber;
+            if (roundNumberText != null) roundNumberText.text = "Round " + game.RoundNumber;
             PlayCue(wasHit ? correctClip : wrongClip);
         }
 
@@ -134,23 +134,23 @@ namespace MiniGames
         {
             if (statusText == null) return;
             statusText.text = struckActor == Actor.Player
-                ? "the bot caught you -- strike against you"
-                : "you caught the bot -- strike landed";
+                ? "The bot caught you -- strike against you"
+                : "You caught the bot -- strike landed";
         }
 
         private void HandleRoleFlipped(Actor newPointer)
         {
             if (statusText == null) return;
             statusText.text = newPointer == Actor.Player
-                ? "missed -- you're the pointer now"
-                : "missed -- bot is the pointer now";
+                ? "Missed -- you're the Pointer now"
+                : "Missed -- the bot is the Pointer now";
         }
 
         private void HandleGameWon(Actor winner)
         {
             if (statusText != null) statusText.text = string.Empty;
             if (winPanel != null) winPanel.SetActive(true);
-            if (winText != null) winText.text = winner == Actor.Player ? "you win!" : "bot wins";
+            if (winText != null) winText.text = winner == Actor.Player ? "You win!" : "Bot wins!";
 
             // Keep the outcome around as a variable other scripts/scenes can read.
             ShadowBoxResult.Set(winner);
@@ -169,9 +169,9 @@ namespace MiniGames
         private void UpdateRoleLabels()
         {
             if (playerRoleText != null)
-                playerRoleText.text = game.CurrentPointer == Actor.Player ? "pointer" : "looker";
+                playerRoleText.text = game.CurrentPointer == Actor.Player ? "Pointer\n(You)" : "Looker\n(You)";
             if (botRoleText != null)
-                botRoleText.text = game.CurrentPointer == Actor.Bot ? "pointer" : "looker";
+                botRoleText.text = game.CurrentPointer == Actor.Bot ? "Pointer" : "Looker";
         }
 
         private void UpdatePips()
