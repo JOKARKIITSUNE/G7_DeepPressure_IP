@@ -8,9 +8,10 @@ namespace CrimeGame
 
     /// <summary>
     /// Drives a single crime decision point (food court theft, HDB vandalism,
-    /// etc). Yes -> the crime is marked immediately. No -> triggers the shadow
-    /// box minigame on a harder difficulty as the "resistance" mechanic: win it
-    /// and the crime is avoided, lose it and the crime is marked anyway.
+    /// etc). Yes -> creates a pending crime task that is completed by interacting
+    /// with the target object. No -> triggers the shadow box minigame on a harder
+    /// difficulty as the "resistance" mechanic: win it and the crime is avoided,
+    /// lose it and the crime is marked anyway.
     /// </summary>
     public class CrimeDecisionController : MonoBehaviour
     {
@@ -19,6 +20,12 @@ namespace CrimeGame
 
         [TextArea]
         [SerializeField] private string promptText = "Should we do it?";
+
+        [Header("Accepted crime task")]
+        [TextArea]
+        [SerializeField] private string acceptedTaskText = "Steal from the unattended bag.";
+
+        public bool IsCrimeActionPending { get; private set; }
 
         [Header("References")]
         [SerializeField] private ChoiceDialogueUI choiceDialogue;
@@ -44,7 +51,26 @@ namespace CrimeGame
 
         private void HandleYes()
         {
+            IsCrimeActionPending = true;
+
+            if (TaskPanelUI.Instance != null)
+            {
+                TaskPanelUI.Instance.SetTask(acceptedTaskText);
+            }
+        }
+
+        public void CompleteCrimeAction()
+        {
+            if (!IsCrimeActionPending) return;
+
+            IsCrimeActionPending = false;
             MarkCrime();
+
+            if (TaskPanelUI.Instance != null)
+            {
+                TaskPanelUI.Instance.ClearTask();
+            }
+
             onDecisionComplete?.Invoke();
         }
 
