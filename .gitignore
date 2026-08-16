@@ -73,3 +73,14 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
+
+# Large third-party terrain/tree packages; install locally if needed.
+/Assets/Realistic Tree/
+/Assets/Realistic Tree.meta
+/Assets/Rowlan/
+/Assets/Rowlan.meta
+/Assets/ProceduralTerrainPainter/
+/Assets/ProceduralTerrainPainter.meta
+
+# Local Git history backups.
+*.bundle
