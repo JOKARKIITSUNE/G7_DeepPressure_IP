@@ -4020,6 +4020,10 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5841588024584728246, guid: e68456d5967a5a14ba9f767edc55bbfb, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5866713013469557463, guid: e68456d5967a5a14ba9f767edc55bbfb, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
@@ -4046,7 +4050,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6462277124783770110, guid: e68456d5967a5a14ba9f767edc55bbfb, type: 3}
       propertyPath: postRoundDelay
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6520510609909011948, guid: e68456d5967a5a14ba9f767edc55bbfb, type: 3}
       propertyPath: m_LocalPosition.x

@@ -107,7 +107,7 @@ namespace MiniGames
         private void HandleRoundStarted()
         {
             if (revealText != null) revealText.text = string.Empty;
-            if (statusText != null) statusText.text = "Your move";
+            if (statusText != null) statusText.text = "<align=\"center\">Your move</align>";
             UpdateRoleLabels();
             UpdatePips();
             if (roundNumberText != null) roundNumberText.text = "Round " + game.RoundNumber;
@@ -134,16 +134,16 @@ namespace MiniGames
         {
             if (statusText == null) return;
             statusText.text = struckActor == Actor.Player
-                ? "The bot caught you -- strike against you"
-                : "You caught the bot -- strike landed";
+                ? "<align=\"center\"><u><nobr>The Bot caught you</nobr></u>\nStrike against you.</align>"
+                : "<align=\"center\"><u><nobr>You caught the Bot</nobr></u>\nStrike landed.</align>";
         }
 
         private void HandleRoleFlipped(Actor newPointer)
         {
             if (statusText == null) return;
             statusText.text = newPointer == Actor.Player
-                ? "Missed -- you're the Pointer now"
-                : "Missed -- the bot is the Pointer now";
+                ? "<align=\"center\"><u>Missed</u>\nYou are the pointer now.</align>"
+                : "<align=\"center\"><u>Missed</u>\nThe Bot is the pointer now.</align>";
         }
 
         private void HandleGameWon(Actor winner)
