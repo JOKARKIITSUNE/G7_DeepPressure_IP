@@ -60,6 +60,12 @@ namespace CrimeGame
         [Tooltip("Fires once the decision is fully resolved (crime marked or avoided), so the scene can continue dialogue/movement")]
         public UnityEvent onDecisionComplete;
 
+        [Header("Custom resistance win")]
+        [SerializeField] private bool useCustomResistanceWinOutcome;
+        public UnityEvent onResistanceWon;
+
+        private MonoBehaviour playerMovementDuringMinigame;
+
         /// <summary>Call this from an NPC interact script to start the decision.</summary>
         public void TriggerDecision()
         {
@@ -93,6 +99,7 @@ namespace CrimeGame
 
         private void HandleNo()
         {
+            SetPlayerMovementEnabled(false);
             minigameGame.botSkill = hardModeBotSkill;
             minigameGame.strikesToLose = hardModeStrikesToLose;
             minigameGame.OnGameWon += HandleMinigameResult;
@@ -110,12 +117,19 @@ namespace CrimeGame
             yield return new WaitForSeconds(resultDisplayDelay);
 
             minigameUI.HideMinigame();
+            SetPlayerMovementEnabled(true);
 
             // Player lost the resistance minigame (bot won) -> crime happens anyway.
             if (winner == MiniGames.Actor.Bot)
             {
                 MarkCrime();
                 ShowResistanceLossFollowUp();
+                yield break;
+            }
+
+            if (useCustomResistanceWinOutcome)
+            {
+                onResistanceWon?.Invoke();
                 yield break;
             }
 
@@ -171,6 +185,38 @@ namespace CrimeGame
         {
             if (crimeType == CrimeType.Theft) CrimeTracker.MarkStole();
             else CrimeTracker.MarkVandalized();
+        }
+
+        private void SetPlayerMovementEnabled(bool enabled)
+        {
+            if (playerMovementDuringMinigame == null)
+            {
+                GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
+
+                if (playerObject != null)
+                {
+                    MonoBehaviour[] scripts =
+                        playerObject.GetComponents<MonoBehaviour>();
+
+                    foreach (MonoBehaviour script in scripts)
+                    {
+                        string typeName = script.GetType().Name;
+
+                        if (typeName == "ThirdPersonController" ||
+                            typeName == "FirstPersonController" ||
+                            typeName == "movement")
+                        {
+                            playerMovementDuringMinigame = script;
+                            break;
+                        }
+                    }
+                }
+            }
+
+            if (playerMovementDuringMinigame != null)
+            {
+                playerMovementDuringMinigame.enabled = enabled;
+            }
         }
     }
 }
