@@ -49,6 +49,11 @@ namespace CrimeGame
         {
             "Ok, nevermind, I'll catch up with you later."
         };
+        [TextArea]
+        [SerializeField] private string[] resistanceLossDialogueLines =
+        {
+            "Come on man, make up your mind!"
+        };
         [SerializeField] private string resistanceWinTask = "Go home.";
         [SerializeField] private GameObject exitTriggerAfterResistanceWin;
 
@@ -110,7 +115,7 @@ namespace CrimeGame
             if (winner == MiniGames.Actor.Bot)
             {
                 MarkCrime();
-                onDecisionComplete?.Invoke();
+                ShowResistanceLossFollowUp();
                 yield break;
             }
 
@@ -131,6 +136,20 @@ namespace CrimeGame
             }
 
             CompleteResistanceWinFollowUp();
+        }
+
+        private void ShowResistanceLossFollowUp()
+        {
+            if (resistanceWinDialogueUI != null)
+            {
+                resistanceWinDialogueUI.ShowLines(
+                    resistanceWinSpeaker,
+                    resistanceLossDialogueLines,
+                    () => onDecisionComplete?.Invoke());
+                return;
+            }
+
+            onDecisionComplete?.Invoke();
         }
 
         private void CompleteResistanceWinFollowUp()

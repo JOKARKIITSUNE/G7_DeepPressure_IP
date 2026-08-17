@@ -2568,6 +2568,14 @@ PrefabInstance:
       value: Ok, nevermind, I'll catch up with you later.
       objectReference: {fileID: 0}
     - target: {fileID: 4831259535551032430, guid: bd74d6ceb38089f45b4e6929fd7504a5, type: 3}
+      propertyPath: resistanceLossDialogueLines.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4831259535551032430, guid: bd74d6ceb38089f45b4e6929fd7504a5, type: 3}
+      propertyPath: 'resistanceLossDialogueLines.Array.data[0]'
+      value: Come on man, make up your mind!
+      objectReference: {fileID: 0}
+    - target: {fileID: 4831259535551032430, guid: bd74d6ceb38089f45b4e6929fd7504a5, type: 3}
       propertyPath: resistanceWinTask
       value: Go home.
       objectReference: {fileID: 0}
