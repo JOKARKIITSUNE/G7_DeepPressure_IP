@@ -1,69 +1,96 @@
-using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace CrimeGame
 {
     /// <summary>
-    /// Drop this into the police confrontation scene. On Start, it reads
-    /// CrimeTracker.GetEnding() and shows the matching outcome text. Wire the
-    /// "no crimes" outcome to continue into your QR code / quiz scene.
+    /// Displays the full-screen PNG matching the crimes recorded this run.
+    /// The images are loaded from Assets/Resources/Endings.
     /// </summary>
     public class PoliceEndingController : MonoBehaviour
     {
-        [Header("References")]
-        [SerializeField] private GameObject endingPanel;
-        [SerializeField] private TMP_Text endingText;
-
-        [Header("Outcome text")]
-        [TextArea(3, 6)]
-        [SerializeField]
-        private string bothCrimesText =
-            "The police corner your friend outside the flat. He doesn't hesitate -- " +
-            "\"It was all him, officer. My hands are clean.\" They believe him. " +
-            "You're the one who gets taken in.";
-
-        [TextArea(3, 6)]
-        [SerializeField]
-        private string oneCrimeText =
-            "The officers already have a report with both your names on it. " +
-            "There's no talking your way out of this one -- you're both arrested.";
-
-        [TextArea(3, 6)]
-        [SerializeField]
-        private string noCrimesText =
-            "The police only want your friend. You watch as they're led away, " +
-            "and for once, you're not part of the story. Your hands are clean -- for real.";
-
-        [Header("Continue to reward (only for the no-crimes ending)")]
-        [SerializeField] private GameObject continueToRewardButton;
+        private const string BadEndingPath = "Endings/BadEnding";
+        private const string NeutralEndingPath = "Endings/NeutralEnding";
+        private const string GoodEndingPath = "Endings/GoodEnding";
 
         public EndingType ResolvedEnding { get; private set; }
 
-        private void Start()
+        public void ShowTrackedEnding()
         {
             ResolvedEnding = CrimeTracker.GetEnding();
-            ShowEnding(ResolvedEnding);
-        }
 
-        private void ShowEnding(EndingType ending)
-        {
-            if (endingPanel != null) endingPanel.SetActive(true);
-
-            string text = ending switch
+            string imagePath = ResolvedEnding switch
             {
-                EndingType.BothCrimes => bothCrimesText,
-                EndingType.OneCrime => oneCrimeText,
-                EndingType.NoCrimes => noCrimesText,
+                EndingType.BothCrimes => BadEndingPath,
+                EndingType.OneCrime => NeutralEndingPath,
+                EndingType.NoCrimes => GoodEndingPath,
                 _ => string.Empty
             };
 
-            if (endingText != null) endingText.text = text;
-
-            // Only the "did nothing" ending leads to the QR code / quiz reward.
-            if (continueToRewardButton != null)
+            Texture2D endingTexture = Resources.Load<Texture2D>(imagePath);
+            if (endingTexture == null)
             {
-                continueToRewardButton.SetActive(ending == EndingType.NoCrimes);
+                Debug.LogError($"PoliceEndingController: Could not load Resources/{imagePath}.png");
+                return;
             }
+
+            CreateEndingCanvas(endingTexture);
+        }
+
+        private static void CreateEndingCanvas(Texture endingTexture)
+        {
+            GameObject canvasObject = new GameObject(
+                "EndingCanvas",
+                typeof(RectTransform),
+                typeof(Canvas),
+                typeof(CanvasScaler),
+                typeof(GraphicRaycaster));
+
+            Canvas canvas = canvasObject.GetComponent<Canvas>();
+            canvas.renderMode = RenderMode.ScreenSpaceOverlay;
+            canvas.sortingOrder = 5000;
+
+            CanvasScaler scaler = canvasObject.GetComponent<CanvasScaler>();
+            scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
+            scaler.referenceResolution = new Vector2(1050f, 600f);
+            scaler.matchWidthOrHeight = 0.5f;
+
+            GameObject backgroundObject = new GameObject(
+                "Background",
+                typeof(RectTransform),
+                typeof(Image));
+            backgroundObject.transform.SetParent(canvasObject.transform, false);
+
+            RectTransform backgroundRect = backgroundObject.GetComponent<RectTransform>();
+            StretchToParent(backgroundRect);
+            Image background = backgroundObject.GetComponent<Image>();
+            background.color = new Color32(32, 32, 32, 255);
+
+            GameObject imageObject = new GameObject(
+                "EndingImage",
+                typeof(RectTransform),
+                typeof(RawImage),
+                typeof(AspectRatioFitter));
+            imageObject.transform.SetParent(canvasObject.transform, false);
+
+            RectTransform imageRect = imageObject.GetComponent<RectTransform>();
+            StretchToParent(imageRect);
+
+            RawImage image = imageObject.GetComponent<RawImage>();
+            image.texture = endingTexture;
+            image.raycastTarget = true;
+
+            AspectRatioFitter fitter = imageObject.GetComponent<AspectRatioFitter>();
+            fitter.aspectMode = AspectRatioFitter.AspectMode.FitInParent;
+            fitter.aspectRatio = (float)endingTexture.width / endingTexture.height;
+        }
+
+        private static void StretchToParent(RectTransform rectTransform)
+        {
+            rectTransform.anchorMin = Vector2.zero;
+            rectTransform.anchorMax = Vector2.one;
+            rectTransform.offsetMin = Vector2.zero;
+            rectTransform.offsetMax = Vector2.zero;
         }
     }
 }

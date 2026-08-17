@@ -72,11 +72,20 @@ namespace CrimeGame
         [SerializeField] private NPCInteract policeInteraction;
         [SerializeField] private string policeTask = "Talk to Police.";
 
+        [Header("Ending")]
+        [SerializeField] private PoliceEndingController endingController;
+        [SerializeField] private string[] badEndingSnitchLines =
+        {
+            "He did it."
+        };
+
         [Header("Player control")]
         [Tooltip("Optional. Assign the player's Third Person Controller component.")]
         [SerializeField] private MonoBehaviour playerMovement;
 
         public bool CanPlayerKick { get; private set; }
+
+        private bool endingStarted;
 
         private void Start()
         {
@@ -92,8 +101,15 @@ namespace CrimeGame
             if (jaidenCutsceneCamera != null)
                 jaidenCutsceneCamera.gameObject.SetActive(false);
 
+            FindPoliceInteractionIfNeeded();
             if (policeInteraction != null)
+            {
                 policeInteraction.enabled = false;
+                policeInteraction.onDialogueComplete.RemoveListener(HandlePoliceDialogueComplete);
+                policeInteraction.onDialogueComplete.AddListener(HandlePoliceDialogueComplete);
+            }
+
+            EnsureEndingController();
 
             foreach (Transform officer in policeOfficers)
             {
@@ -102,6 +118,12 @@ namespace CrimeGame
             }
 
             FindPlayerMovementIfNeeded();
+        }
+
+        private void OnDestroy()
+        {
+            if (policeInteraction != null)
+                policeInteraction.onDialogueComplete.RemoveListener(HandlePoliceDialogueComplete);
         }
 
         public void BeginDecision()
@@ -502,6 +524,64 @@ namespace CrimeGame
 
             if (gameplayCamera != null)
                 gameplayCamera.enabled = true;
+        }
+
+        private void FindPoliceInteractionIfNeeded()
+        {
+            if (policeInteraction != null) return;
+
+            foreach (Transform officer in policeOfficers)
+            {
+                if (officer == null) continue;
+
+                NPCInteract interaction =
+                    officer.GetComponentInChildren<NPCInteract>(true);
+                if (interaction == null) continue;
+
+                policeInteraction = interaction;
+                return;
+            }
+        }
+
+        private void HandlePoliceDialogueComplete()
+        {
+            if (endingStarted) return;
+            endingStarted = true;
+
+            if (TaskPanelUI.Instance != null)
+                TaskPanelUI.Instance.ClearTask();
+
+            if (policeInteraction != null)
+                policeInteraction.enabled = false;
+
+            SetPlayerMovementEnabled(false);
+
+            if (CrimeTracker.GetEnding() == EndingType.BothCrimes &&
+                dialogueUI != null)
+            {
+                dialogueUI.ShowLines(
+                    jaidenSpeaker,
+                    badEndingSnitchLines,
+                    ShowEndingScreen);
+                return;
+            }
+
+            ShowEndingScreen();
+        }
+
+        private void EnsureEndingController()
+        {
+            if (endingController != null) return;
+
+            endingController = GetComponent<PoliceEndingController>();
+            if (endingController == null)
+                endingController = gameObject.AddComponent<PoliceEndingController>();
+        }
+
+        private void ShowEndingScreen()
+        {
+            EnsureEndingController();
+            endingController.ShowTrackedEnding();
         }
 
         private void FindPlayerMovementIfNeeded()
