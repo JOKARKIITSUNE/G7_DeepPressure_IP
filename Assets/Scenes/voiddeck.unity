@@ -961,11 +961,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 1be6f10ce303f804e87588911bc229b2, type: 3}
       propertyPath: m_Name
-      value: Character_18_Police
+      value: Police1
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 1be6f10ce303f804e87588911bc229b2, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2049,6 +2049,93 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.5, y: 2.9999998, z: 0.5}
   m_Center: {x: -0.25, y: 1.5, z: 0.25}
+--- !u!114 &288132271 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2324634775440750226, guid: 8f22167cfd9d81f41a1f1971a32094d5, type: 3}
+  m_PrefabInstance: {fileID: 1490175426}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca79f312bd65dec499bbeaa8a425e792, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CrimeGame.DialogueLineUI
+--- !u!1 &298105208
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 298105209}
+  - component: {fileID: 298105211}
+  - component: {fileID: 298105210}
+  m_Layer: 0
+  m_Name: InteractionZone
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &298105209
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 298105208}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 771890082}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &298105210
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 298105208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b32fa584565b5ce428bf7a3be83b0f3b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CrimeGame.NPCInteract
+  npcName: Police
+  dialogueLines:
+  - You're Under Arrest!
+  dialogueUI: {fileID: 288132271}
+  playerTag: Player
+  interactPrompt: {fileID: 0}
+  disableAfterDialogue: 1
+  onDialogueComplete:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!65 &298105211
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 298105208}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &310446836
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2281,11 +2368,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 0facb2713fce3ac47b7285938237cf5e, type: 3}
       propertyPath: m_Name
-      value: Character_17_Police
+      value: Police3
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 0facb2713fce3ac47b7285938237cf5e, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2799,13 +2886,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 456841455}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0.14780933, y: 0.9890159, z: -0, w: 0}
   m_LocalPosition: {x: 0.949, y: -5.165, z: -2.74}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1922063819}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: -17}
 --- !u!1 &463867333
 GameObject:
   m_ObjectHideFlags: 0
@@ -3130,6 +3217,11 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2.9999998, y: 0.19999997, z: 2.9999998}
   m_Center: {x: -1.4999999, y: -0.09999999, z: 1.4999999}
+--- !u!20 &527370044 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 8137988805281814931, guid: 242d4b1024a551a4c891c96ec28e76df, type: 3}
+  m_PrefabInstance: {fileID: 1887980127}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &566817661
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3287,6 +3379,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dce18cc92d3b9e4488389397327fd566, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DustbinKickInteract
+  storyController: {fileID: 1674093789}
+  interactPrompt: {fileID: 830315847}
+  playerTag: Player
 --- !u!1001 &588736207
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4550,15 +4645,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: d9d2aac3a708e2349ba9a81b78ce4eb6, type: 3}
       propertyPath: m_Name
-      value: Character_20_Female_Police
+      value: Police2
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: d9d2aac3a708e2349ba9a81b78ce4eb6, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: d9d2aac3a708e2349ba9a81b78ce4eb6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 298105209}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d9d2aac3a708e2349ba9a81b78ce4eb6, type: 3}
 --- !u!4 &771890082 stripped
@@ -6070,13 +6168,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1030901222}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 2.622, y: -5.299, z: -2.589}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1922063819}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1 &1033485914
 GameObject:
   m_ObjectHideFlags: 0
@@ -6101,13 +6199,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1033485914}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0.14780942, y: 0.9890159, z: 0, w: 0}
   m_LocalPosition: {x: 4.033, y: -5.17, z: -2.64}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1922063819}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 17}
 --- !u!1001 &1035733291
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6377,7 +6475,7 @@ Transform:
   m_GameObject: {fileID: 1059069655}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -1.15, z: -16.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7967,17 +8065,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd74d6ceb38089f45b4e6929fd7504a5, type: 3}
---- !u!114 &1273903786 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4831259535551032430, guid: bd74d6ceb38089f45b4e6929fd7504a5, type: 3}
-  m_PrefabInstance: {fileID: 1273903785}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33cd6e591afcf184aae6dc584bc318aa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CrimeGame.CrimeDecisionController
 --- !u!1001 &1289089443
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9994,6 +10081,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5652981541067773880, guid: 2ea05912f9ede1e40957197f1c409fa2, type: 3}
+      propertyPath: dialogueUI
+      value: 
+      objectReference: {fileID: 288132271}
+    - target: {fileID: 5652981541067773880, guid: 2ea05912f9ede1e40957197f1c409fa2, type: 3}
+      propertyPath: dialogueLines.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5652981541067773880, guid: 2ea05912f9ede1e40957197f1c409fa2, type: 3}
       propertyPath: 'dialogueLines.Array.data[0]'
       value: Hey! I see this dustbin filled to the brim!
       objectReference: {fileID: 0}
@@ -10002,26 +10097,53 @@ PrefabInstance:
       value: Hey! I see this dustbin filled to the brim!
       objectReference: {fileID: 0}
     - target: {fileID: 5652981541067773880, guid: 2ea05912f9ede1e40957197f1c409fa2, type: 3}
+      propertyPath: onDialogueComplete.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5652981541067773880, guid: 2ea05912f9ede1e40957197f1c409fa2, type: 3}
       propertyPath: onDialogueComplete.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5652981541067773880, guid: 2ea05912f9ede1e40957197f1c409fa2, type: 3}
       propertyPath: onDialogueComplete.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1273903786}
+      objectReference: {fileID: 1674093789}
+    - target: {fileID: 5652981541067773880, guid: 2ea05912f9ede1e40957197f1c409fa2, type: 3}
+      propertyPath: onDialogueComplete.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5652981541067773880, guid: 2ea05912f9ede1e40957197f1c409fa2, type: 3}
       propertyPath: onDialogueComplete.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: TriggerDecision
+      value: BeginDecision
       objectReference: {fileID: 0}
     - target: {fileID: 5652981541067773880, guid: 2ea05912f9ede1e40957197f1c409fa2, type: 3}
       propertyPath: onDialogueComplete.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: CrimeGame.CrimeDecisionController, Assembly-CSharp
+      value: CrimeGame.VoidDeckStoryController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5652981541067773880, guid: 2ea05912f9ede1e40957197f1c409fa2, type: 3}
+      propertyPath: onDialogueComplete.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5652981541067773880, guid: 2ea05912f9ede1e40957197f1c409fa2, type: 3}
+      propertyPath: onDialogueComplete.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ea05912f9ede1e40957197f1c409fa2, type: 3}
+--- !u!114 &1629862481 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5652981541067773880, guid: 2ea05912f9ede1e40957197f1c409fa2, type: 3}
+  m_PrefabInstance: {fileID: 1629862480}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b32fa584565b5ce428bf7a3be83b0f3b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CrimeGame.NPCInteract
 --- !u!1001 &1641147613
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10311,6 +10433,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1674093788}
   - component: {fileID: 1674093789}
+  - component: {fileID: 1674093790}
   m_Layer: 0
   m_Name: VoidDeckStory
   m_TagString: Untagged
@@ -10348,6 +10471,132 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 725f12b73c361ae4f8012143afffa15c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NewMonoBehaviourScript
+  choiceDialogue: {fileID: 674015863}
+  jaidenInteraction: {fileID: 1629862481}
+  choiceText: Wanna trash this void deck?
+  dustbinInteraction: {fileID: 568498033}
+  dustbin: {fileID: 1039088556}
+  fallenDustbinPoint: {fileID: 767108727}
+  kickTask: Kick the dustbin.
+  kickMoveDuration: 0.2
+  onPlayerKickFinished:
+    m_PersistentCalls:
+      m_Calls: []
+  gameplayCamera: {fileID: 527370044}
+  policeSpawnCamera: {fileID: 1059069659}
+  policeOfficers:
+  - {fileID: 114095680}
+  - {fileID: 771890082}
+  - {fileID: 316388256}
+  policeSpawnPoints:
+  - {fileID: 456841456}
+  - {fileID: 1030901223}
+  - {fileID: 1033485915}
+  pauseBeforePoliceCamera: 2
+  policeRiseDuration: 0.2
+  policeStartDepth: 3
+  pauseAfterPoliceArrival: 2
+  policeArrivalAudio: {fileID: 1674093790}
+  policeInteraction: {fileID: 0}
+  policeTask: Talk to Police.
+  playerMovement: {fileID: 0}
+--- !u!82 &1674093790
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1674093787}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 8300000, guid: 8fce4f0ae2e77584ebb9882367e9c6d2, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1001 &1677620370
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11059,8 +11308,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 771890082}
   - {fileID: 114095680}
+  - {fileID: 771890082}
   - {fileID: 316388256}
   m_Father: {fileID: 1674093788}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -11318,9 +11567,25 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -1.0266283
       objectReference: {fileID: 0}
+    - target: {fileID: 3683845151673084522, guid: 242d4b1024a551a4c891c96ec28e76df, type: 3}
+      propertyPath: MoveSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3683845151673084522, guid: 242d4b1024a551a4c891c96ec28e76df, type: 3}
+      propertyPath: SprintSpeed
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 3761667573686960532, guid: 242d4b1024a551a4c891c96ec28e76df, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 7058911170705068166, guid: 242d4b1024a551a4c891c96ec28e76df, type: 3}
+      propertyPath: m_UseGravity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7058911170705068166, guid: 242d4b1024a551a4c891c96ec28e76df, type: 3}
+      propertyPath: m_IsKinematic
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8137988805281814932, guid: 242d4b1024a551a4c891c96ec28e76df, type: 3}
       propertyPath: m_LocalPosition.x
