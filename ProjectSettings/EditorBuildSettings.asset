@@ -9,17 +9,17 @@ EditorBuildSettings:
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
-    path: Assets/Scenes/classrooms.unity
-    guid: ae70e74c2a355354387de19b2929c20d
-  - enabled: 1
     path: Assets/Scenes/start.unity
     guid: 121b304741a69674a90ad9cbaf9b0f52
   - enabled: 1
-    path: Assets/Scenes/voiddeck.unity
-    guid: 7b7393f8623b84646889cfbbc5be0c3e
+    path: Assets/Scenes/classrooms.unity
+    guid: ae70e74c2a355354387de19b2929c20d
   - enabled: 1
     path: Assets/Scenes/foodclub.unity
     guid: 853b0568bf4cd524e965464b01c84e57
+  - enabled: 1
+    path: Assets/Scenes/voiddeck.unity
+    guid: 7b7393f8623b84646889cfbbc5be0c3e
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
