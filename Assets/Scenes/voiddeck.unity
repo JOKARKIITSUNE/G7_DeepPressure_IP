@@ -10886,6 +10886,14 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6462277124783770110, guid: e68456d5967a5a14ba9f767edc55bbfb, type: 3}
+      propertyPath: botSkill
+      value: 0.237
+      objectReference: {fileID: 0}
+    - target: {fileID: 6462277124783770110, guid: e68456d5967a5a14ba9f767edc55bbfb, type: 3}
+      propertyPath: postRoundDelay
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 6520510609909011948, guid: e68456d5967a5a14ba9f767edc55bbfb, type: 3}
       propertyPath: m_LocalPosition.x
       value: 40056.273

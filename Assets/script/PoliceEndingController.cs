@@ -1,4 +1,6 @@
+using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace CrimeGame
@@ -12,6 +14,7 @@ namespace CrimeGame
         private const string BadEndingPath = "Endings/BadEnding";
         private const string NeutralEndingPath = "Endings/NeutralEnding";
         private const string GoodEndingPath = "Endings/GoodEnding";
+        private const string MainMenuScene = "start";
 
         public EndingType ResolvedEnding { get; private set; }
 
@@ -35,6 +38,8 @@ namespace CrimeGame
             }
 
             CreateEndingCanvas(endingTexture);
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
         }
 
         private static void CreateEndingCanvas(Texture endingTexture)
@@ -83,6 +88,55 @@ namespace CrimeGame
             AspectRatioFitter fitter = imageObject.GetComponent<AspectRatioFitter>();
             fitter.aspectMode = AspectRatioFitter.AspectMode.FitInParent;
             fitter.aspectRatio = (float)endingTexture.width / endingTexture.height;
+
+            CreateMainMenuButton(canvasObject.transform);
+        }
+
+        private static void CreateMainMenuButton(Transform parent)
+        {
+            GameObject buttonObject = new GameObject(
+                "BackToMainMenuButton",
+                typeof(RectTransform),
+                typeof(Image),
+                typeof(Button));
+            buttonObject.transform.SetParent(parent, false);
+
+            RectTransform buttonRect = buttonObject.GetComponent<RectTransform>();
+            buttonRect.anchorMin = new Vector2(0.5f, 0f);
+            buttonRect.anchorMax = new Vector2(0.5f, 0f);
+            buttonRect.pivot = new Vector2(0.5f, 0f);
+            buttonRect.anchoredPosition = new Vector2(0f, 35f);
+            buttonRect.sizeDelta = new Vector2(280f, 58f);
+
+            Image buttonImage = buttonObject.GetComponent<Image>();
+            buttonImage.color = Color.white;
+
+            Button button = buttonObject.GetComponent<Button>();
+            button.targetGraphic = buttonImage;
+            button.onClick.AddListener(ReturnToMainMenu);
+
+            GameObject labelObject = new GameObject(
+                "Label",
+                typeof(RectTransform),
+                typeof(TextMeshProUGUI));
+            labelObject.transform.SetParent(buttonObject.transform, false);
+
+            RectTransform labelRect = labelObject.GetComponent<RectTransform>();
+            StretchToParent(labelRect);
+
+            TextMeshProUGUI label = labelObject.GetComponent<TextMeshProUGUI>();
+            label.text = "BACK TO MAIN MENU";
+            label.fontSize = 25f;
+            label.color = new Color32(32, 32, 32, 255);
+            label.alignment = TextAlignmentOptions.Center;
+            label.raycastTarget = false;
+        }
+
+        private static void ReturnToMainMenu()
+        {
+            Time.timeScale = 1f;
+            CrimeTracker.Reset();
+            SceneManager.LoadScene(MainMenuScene);
         }
 
         private static void StretchToParent(RectTransform rectTransform)
