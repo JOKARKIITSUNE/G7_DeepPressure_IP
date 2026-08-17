@@ -112,10 +112,9 @@ namespace CrimeGame
 
             minigameUI.HideMinigame();
 
-            // Player lost the resistance minigame (bot won) -> crime happens anyway.
+            // Player lost the resistance minigame (bot won) -> let them retry.
             if (winner == MiniGames.Actor.Bot)
             {
-                MarkCrime();
                 ShowResistanceLossFollowUp();
                 yield break;
             }
