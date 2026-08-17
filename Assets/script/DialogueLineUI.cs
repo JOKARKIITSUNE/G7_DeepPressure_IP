@@ -1,14 +1,13 @@
 using System;
 using TMPro;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 namespace CrimeGame
 {
     /// <summary>
     /// Reusable linear dialogue box: shows a speaker name and a sequence of
-    /// lines, one at a time, advanced by pressing E or clicking Continue.
+    /// lines, one at a time, advanced by clicking Continue.
     /// Any NPC can reuse this instead of building its own dialogue UI.
     /// </summary>
     public class DialogueLineUI : MonoBehaviour
@@ -17,9 +16,6 @@ namespace CrimeGame
         [SerializeField] private TMP_Text nameText;
         [SerializeField] private TMP_Text lineText;
         [SerializeField] private Button continueButton;
-
-        [Tooltip("Key that advances to the next line")]
-        [SerializeField] private Key advanceKey = Key.E;
 
         private string[] _lines;
         private int _index;
@@ -30,12 +26,6 @@ namespace CrimeGame
         {
             if (continueButton != null) continueButton.onClick.AddListener(Advance);
             if (panelRoot != null) panelRoot.SetActive(false);
-        }
-
-        private void Update()
-        {
-            if (!_active || Keyboard.current == null) return;
-            if (Keyboard.current[advanceKey].wasPressedThisFrame) Advance();
         }
 
         /// <summary>Starts showing the given lines. Calls onComplete once the last line is dismissed.</summary>
