@@ -12,6 +12,37 @@ namespace CrimeGame
         [TextArea]
         [SerializeField] private string choiceText = "Wanna trash this void deck?";
 
+        [Header("Resistance minigame")]
+        [SerializeField] private MiniGames.ShadowBoxUI minigameUI;
+        [SerializeField] private MiniGames.ShadowBoxGame minigameGame;
+        [Range(0f, 1f)]
+        [SerializeField] private float resistanceBotSkill = 0.8f;
+        [SerializeField] private int resistanceStrikesToLose = 3;
+        [Min(0f)]
+        [SerializeField] private float resistanceResultDelay = 2f;
+        [SerializeField] private DialogueLineUI dialogueUI;
+        [SerializeField] private string jaidenSpeaker = "Jaiden";
+        [TextArea]
+        [SerializeField] private string[] resistanceLossLines =
+        {
+            "Come on man, make up your mind!"
+        };
+        [TextArea]
+        [SerializeField] private string[] resistanceWinLines =
+        {
+            "Fine, I'll do it myself."
+        };
+        [SerializeField] private string retryTask = "Talk to Jaiden.";
+
+        [Header("Jaiden win cutscene")]
+        [SerializeField] private Camera jaidenCutsceneCamera;
+        [SerializeField] private Transform playerCharacter;
+        [SerializeField] private Transform playerCutscenePoint;
+        [SerializeField] private Transform jaiden;
+        [SerializeField] private Transform jaidenKickPoint;
+        [Min(0.01f)]
+        [SerializeField] private float jaidenMoveDuration = 0.15f;
+
         [Header("Player kick path")]
         [SerializeField] private DustbinKickInteract dustbinInteraction;
         [SerializeField] private Transform dustbin;
@@ -58,6 +89,9 @@ namespace CrimeGame
             if (policeSpawnCamera != null)
                 policeSpawnCamera.gameObject.SetActive(false);
 
+            if (jaidenCutsceneCamera != null)
+                jaidenCutsceneCamera.gameObject.SetActive(false);
+
             if (policeInteraction != null)
                 policeInteraction.enabled = false;
 
@@ -97,10 +131,91 @@ namespace CrimeGame
 
         private void HandleNo()
         {
-            // The resistance-minigame path will be connected in the next step.
-            // Re-enable Jaiden for now so testing No cannot leave the story stuck.
+            if (minigameUI == null || minigameGame == null)
+            {
+                Debug.LogWarning("VoidDeckStoryController: Minigame UI or Game is not assigned.");
+                CompleteResistanceLoss();
+                return;
+            }
+
+            if (TaskPanelUI.Instance != null)
+                TaskPanelUI.Instance.ClearTask();
+
+            SetPlayerMovementEnabled(false);
+            minigameGame.botSkill = resistanceBotSkill;
+            minigameGame.strikesToLose = resistanceStrikesToLose;
+            minigameGame.OnGameWon -= HandleResistanceResult;
+            minigameGame.OnGameWon += HandleResistanceResult;
+            minigameUI.ShowMinigame();
+        }
+
+        private void HandleResistanceResult(MiniGames.Actor winner)
+        {
+            minigameGame.OnGameWon -= HandleResistanceResult;
+            StartCoroutine(ResolveResistanceResult(winner));
+        }
+
+        private IEnumerator ResolveResistanceResult(MiniGames.Actor winner)
+        {
+            yield return new WaitForSeconds(resistanceResultDelay);
+
+            if (minigameUI != null)
+                minigameUI.HideMinigame();
+
+            if (winner == MiniGames.Actor.Bot)
+            {
+                ShowResistanceLossDialogue();
+                yield break;
+            }
+
+            BeginJaidenWinCutscene();
+        }
+
+        private void ShowResistanceLossDialogue()
+        {
+            if (dialogueUI != null)
+            {
+                dialogueUI.ShowLines(
+                    jaidenSpeaker,
+                    resistanceLossLines,
+                    CompleteResistanceLoss);
+                return;
+            }
+
+            CompleteResistanceLoss();
+        }
+
+        private void CompleteResistanceLoss()
+        {
+            if (TaskPanelUI.Instance != null)
+                TaskPanelUI.Instance.SetTask(retryTask);
+
             if (jaidenInteraction != null)
                 jaidenInteraction.enabled = true;
+
+            SetPlayerMovementEnabled(true);
+        }
+
+        private void BeginJaidenWinCutscene()
+        {
+            TeleportPlayerToCutscenePoint();
+            SwitchToJaidenCamera();
+
+            if (dialogueUI != null)
+            {
+                dialogueUI.ShowLines(
+                    jaidenSpeaker,
+                    resistanceWinLines,
+                    StartJaidenKick);
+                return;
+            }
+
+            StartJaidenKick();
+        }
+
+        private void StartJaidenKick()
+        {
+            StartCoroutine(JaidenKickSequence());
         }
 
         public void PlayerKickedDustbin()
@@ -116,7 +231,70 @@ namespace CrimeGame
 
             CrimeTracker.MarkVandalized();
             SetPlayerMovementEnabled(false);
-            StartCoroutine(MoveDustbinToFallenPoint());
+            StartCoroutine(PlayerKickSequence());
+        }
+
+        private IEnumerator PlayerKickSequence()
+        {
+            yield return MoveDustbinToFallenPoint();
+            onPlayerKickFinished?.Invoke();
+            yield return PoliceArrivalSequence();
+        }
+
+        private IEnumerator JaidenKickSequence()
+        {
+            if (jaiden == null || jaidenKickPoint == null)
+            {
+                Debug.LogWarning("VoidDeckStoryController: Jaiden or Jaiden Kick Point is not assigned.");
+                yield return MoveDustbinToFallenPoint();
+                yield return PoliceArrivalSequence();
+                yield break;
+            }
+
+            Vector3 originalPosition = jaiden.position;
+            Quaternion originalRotation = jaiden.rotation;
+            Vector3 directionToKickPoint = jaidenKickPoint.position - jaiden.position;
+            directionToKickPoint.y = 0f;
+
+            if (directionToKickPoint.sqrMagnitude > 0.001f)
+                jaiden.rotation = Quaternion.LookRotation(directionToKickPoint.normalized);
+
+            yield return MoveCharacter(
+                jaiden,
+                originalPosition,
+                jaidenKickPoint.position,
+                jaidenMoveDuration);
+
+            yield return MoveDustbinToFallenPoint();
+
+            yield return MoveCharacter(
+                jaiden,
+                jaidenKickPoint.position,
+                originalPosition,
+                jaidenMoveDuration);
+
+            jaiden.SetPositionAndRotation(originalPosition, originalRotation);
+            yield return PoliceArrivalSequence();
+        }
+
+        private static IEnumerator MoveCharacter(
+            Transform character,
+            Vector3 start,
+            Vector3 end,
+            float duration)
+        {
+            float elapsed = 0f;
+            while (elapsed < duration)
+            {
+                elapsed += Time.deltaTime;
+                character.position = Vector3.Lerp(
+                    start,
+                    end,
+                    Mathf.Clamp01(elapsed / duration));
+                yield return null;
+            }
+
+            character.position = end;
         }
 
         private IEnumerator MoveDustbinToFallenPoint()
@@ -124,7 +302,6 @@ namespace CrimeGame
             if (dustbin == null || fallenDustbinPoint == null)
             {
                 Debug.LogWarning("VoidDeckStoryController: Dustbin or Fallen Dustbin Point is not assigned.");
-                FinishDustbinKick();
                 yield break;
             }
 
@@ -144,14 +321,72 @@ namespace CrimeGame
             dustbin.SetPositionAndRotation(
                 fallenDustbinPoint.position,
                 fallenDustbinPoint.rotation);
-
-            FinishDustbinKick();
         }
 
-        private void FinishDustbinKick()
+        private void TeleportPlayerToCutscenePoint()
         {
-            onPlayerKickFinished?.Invoke();
-            StartCoroutine(PoliceArrivalSequence());
+            if (playerCharacter == null)
+            {
+                GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
+                if (playerObject != null)
+                    playerCharacter = playerObject.transform;
+            }
+
+            if (playerCharacter == null || playerCutscenePoint == null)
+            {
+                Debug.LogWarning("VoidDeckStoryController: Player Character or Player Cutscene Point is not assigned.");
+                return;
+            }
+
+            CharacterController characterController =
+                playerCharacter.GetComponent<CharacterController>();
+            bool controllerWasEnabled =
+                characterController != null && characterController.enabled;
+
+            if (controllerWasEnabled)
+                characterController.enabled = false;
+
+            playerCharacter.position = playerCutscenePoint.position;
+
+            if (jaiden != null)
+            {
+                Vector3 directionToJaiden = jaiden.position - playerCharacter.position;
+                directionToJaiden.y = 0f;
+                if (directionToJaiden.sqrMagnitude > 0.001f)
+                {
+                    playerCharacter.rotation =
+                        Quaternion.LookRotation(directionToJaiden.normalized);
+                }
+            }
+            else
+            {
+                playerCharacter.rotation = playerCutscenePoint.rotation;
+            }
+
+            if (controllerWasEnabled)
+                characterController.enabled = true;
+        }
+
+        private void SwitchToJaidenCamera()
+        {
+            if (gameplayCamera != null)
+                gameplayCamera.enabled = false;
+
+            if (policeSpawnCamera != null)
+            {
+                policeSpawnCamera.enabled = false;
+                policeSpawnCamera.gameObject.SetActive(false);
+            }
+
+            if (jaidenCutsceneCamera != null)
+            {
+                jaidenCutsceneCamera.gameObject.SetActive(true);
+                jaidenCutsceneCamera.enabled = true;
+            }
+            else
+            {
+                Debug.LogWarning("VoidDeckStoryController: Jaiden Cutscene Camera is not assigned.");
+            }
         }
 
         private IEnumerator PoliceArrivalSequence()
@@ -234,6 +469,12 @@ namespace CrimeGame
             if (gameplayCamera != null)
                 gameplayCamera.enabled = false;
 
+            if (jaidenCutsceneCamera != null)
+            {
+                jaidenCutsceneCamera.enabled = false;
+                jaidenCutsceneCamera.gameObject.SetActive(false);
+            }
+
             if (policeSpawnCamera != null)
             {
                 policeSpawnCamera.gameObject.SetActive(true);
@@ -247,6 +488,12 @@ namespace CrimeGame
 
         private void RestoreGameplayCamera()
         {
+            if (jaidenCutsceneCamera != null)
+            {
+                jaidenCutsceneCamera.enabled = false;
+                jaidenCutsceneCamera.gameObject.SetActive(false);
+            }
+
             if (policeSpawnCamera != null)
             {
                 policeSpawnCamera.enabled = false;

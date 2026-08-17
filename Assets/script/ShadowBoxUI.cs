@@ -61,7 +61,7 @@ namespace MiniGames
             if (downButton != null) downButton.onClick.AddListener(() => game.CaptureInput(PunchDirection.Down));
             if (leftButton != null) leftButton.onClick.AddListener(() => game.CaptureInput(PunchDirection.Left));
             if (rightButton != null) rightButton.onClick.AddListener(() => game.CaptureInput(PunchDirection.Right));
-            if (restartButton != null) restartButton.onClick.AddListener(Restart);
+            if (restartButton != null) restartButton.gameObject.SetActive(false);
             if (continueButton != null) continueButton.onClick.AddListener(ContinueToNextScene);
         }
 
@@ -96,12 +96,6 @@ namespace MiniGames
         {
             game.StopGame();
             if (minigameRoot != null) minigameRoot.SetActive(false);
-        }
-
-        private void Restart()
-        {
-            if (winPanel != null) winPanel.SetActive(false);
-            game.StartGame();
         }
 
         private void HandleRoundStarted()
