@@ -2548,46 +2548,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 4831259535551032430, guid: bd74d6ceb38089f45b4e6929fd7504a5, type: 3}
-      propertyPath: resultDisplayDelay
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4831259535551032430, guid: bd74d6ceb38089f45b4e6929fd7504a5, type: 3}
-      propertyPath: resistanceWinDialogueUI
-      value:
-      objectReference: {fileID: 917794059}
-    - target: {fileID: 4831259535551032430, guid: bd74d6ceb38089f45b4e6929fd7504a5, type: 3}
-      propertyPath: initiatingNpcInteraction
-      value:
-      objectReference: {fileID: 16402018}
-    - target: {fileID: 4831259535551032430, guid: bd74d6ceb38089f45b4e6929fd7504a5, type: 3}
-      propertyPath: resistanceWinSpeaker
-      value: Jaiden
-      objectReference: {fileID: 0}
-    - target: {fileID: 4831259535551032430, guid: bd74d6ceb38089f45b4e6929fd7504a5, type: 3}
-      propertyPath: resistanceWinDialogueLines.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4831259535551032430, guid: bd74d6ceb38089f45b4e6929fd7504a5, type: 3}
-      propertyPath: 'resistanceWinDialogueLines.Array.data[0]'
-      value: Ok, nevermind, I'll catch up with you later.
-      objectReference: {fileID: 0}
-    - target: {fileID: 4831259535551032430, guid: bd74d6ceb38089f45b4e6929fd7504a5, type: 3}
-      propertyPath: resistanceLossDialogueLines.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4831259535551032430, guid: bd74d6ceb38089f45b4e6929fd7504a5, type: 3}
-      propertyPath: 'resistanceLossDialogueLines.Array.data[0]'
-      value: Come on man, make up your mind!
-      objectReference: {fileID: 0}
-    - target: {fileID: 4831259535551032430, guid: bd74d6ceb38089f45b4e6929fd7504a5, type: 3}
-      propertyPath: resistanceWinTask
-      value: Go home.
-      objectReference: {fileID: 0}
-    - target: {fileID: 4831259535551032430, guid: bd74d6ceb38089f45b4e6929fd7504a5, type: 3}
-      propertyPath: exitTriggerAfterResistanceWin
-      value:
-      objectReference: {fileID: 537385834}
-    - target: {fileID: 4831259535551032430, guid: bd74d6ceb38089f45b4e6929fd7504a5, type: 3}
       propertyPath: minigameUI
       value: 
       objectReference: {fileID: 466979745569166080}
@@ -2603,6 +2563,46 @@ PrefabInstance:
       propertyPath: choiceDialogue
       value: 
       objectReference: {fileID: 1370216393}
+    - target: {fileID: 4831259535551032430, guid: bd74d6ceb38089f45b4e6929fd7504a5, type: 3}
+      propertyPath: resistanceWinTask
+      value: Go home.
+      objectReference: {fileID: 0}
+    - target: {fileID: 4831259535551032430, guid: bd74d6ceb38089f45b4e6929fd7504a5, type: 3}
+      propertyPath: resultDisplayDelay
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4831259535551032430, guid: bd74d6ceb38089f45b4e6929fd7504a5, type: 3}
+      propertyPath: resistanceWinSpeaker
+      value: Jaiden
+      objectReference: {fileID: 0}
+    - target: {fileID: 4831259535551032430, guid: bd74d6ceb38089f45b4e6929fd7504a5, type: 3}
+      propertyPath: resistanceWinDialogueUI
+      value: 
+      objectReference: {fileID: 917794059}
+    - target: {fileID: 4831259535551032430, guid: bd74d6ceb38089f45b4e6929fd7504a5, type: 3}
+      propertyPath: initiatingNpcInteraction
+      value: 
+      objectReference: {fileID: 16402018}
+    - target: {fileID: 4831259535551032430, guid: bd74d6ceb38089f45b4e6929fd7504a5, type: 3}
+      propertyPath: exitTriggerAfterResistanceWin
+      value: 
+      objectReference: {fileID: 537385834}
+    - target: {fileID: 4831259535551032430, guid: bd74d6ceb38089f45b4e6929fd7504a5, type: 3}
+      propertyPath: resistanceWinDialogueLines.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4831259535551032430, guid: bd74d6ceb38089f45b4e6929fd7504a5, type: 3}
+      propertyPath: resistanceLossDialogueLines.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4831259535551032430, guid: bd74d6ceb38089f45b4e6929fd7504a5, type: 3}
+      propertyPath: 'resistanceWinDialogueLines.Array.data[0]'
+      value: Ok, nevermind, I'll catch up with you later.
+      objectReference: {fileID: 0}
+    - target: {fileID: 4831259535551032430, guid: bd74d6ceb38089f45b4e6929fd7504a5, type: 3}
+      propertyPath: 'resistanceLossDialogueLines.Array.data[0]'
+      value: Come on man, make up your mind!
+      objectReference: {fileID: 0}
     - target: {fileID: 5516275000579762621, guid: bd74d6ceb38089f45b4e6929fd7504a5, type: 3}
       propertyPath: m_Name
       value: Crime Controller
@@ -4379,6 +4379,10 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1320701377997363168, guid: e68456d5967a5a14ba9f767edc55bbfb, type: 3}
+      propertyPath: restartButton
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 2599063488900898484, guid: e68456d5967a5a14ba9f767edc55bbfb, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
@@ -4537,6 +4541,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6520510609909011948, guid: e68456d5967a5a14ba9f767edc55bbfb, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6740585532388558106, guid: e68456d5967a5a14ba9f767edc55bbfb, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6742646813223227035, guid: e68456d5967a5a14ba9f767edc55bbfb, type: 3}
