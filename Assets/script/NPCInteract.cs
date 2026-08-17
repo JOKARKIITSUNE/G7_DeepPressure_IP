@@ -29,6 +29,9 @@ namespace CrimeGame
         [Tooltip("Optional on-screen prompt (e.g. 'Press E to talk') shown while in range")]
         [SerializeField] private GameObject interactPrompt;
 
+        [Tooltip("Disable this interaction permanently after its dialogue finishes")]
+        [SerializeField] private bool disableAfterDialogue;
+
         [Tooltip("Fires after the last dialogue line is dismissed")]
         public UnityEvent onDialogueComplete;
 
@@ -70,9 +73,21 @@ namespace CrimeGame
         private void HandleDialogueComplete()
         {
             _dialogueActive = false;
-            if (_playerInRange && interactPrompt != null) interactPrompt.SetActive(true);
-
             onDialogueComplete?.Invoke();
+
+            if (!enabled || disableAfterDialogue)
+            {
+                if (interactPrompt != null) interactPrompt.SetActive(false);
+                enabled = false;
+                return;
+            }
+
+            if (_playerInRange && interactPrompt != null) interactPrompt.SetActive(true);
+        }
+
+        private void OnDisable()
+        {
+            if (interactPrompt != null) interactPrompt.SetActive(false);
         }
     }
 }

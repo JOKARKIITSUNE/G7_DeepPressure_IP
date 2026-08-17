@@ -63,6 +63,7 @@ namespace CrimeGame
         /// <summary>Call this from an NPC interact script to start the decision.</summary>
         public void TriggerDecision()
         {
+            if (initiatingNpcInteraction != null) initiatingNpcInteraction.enabled = false;
             choiceDialogue.Show(promptText, onYes: HandleYes, onNo: HandleNo);
         }
 
@@ -145,10 +146,16 @@ namespace CrimeGame
                 resistanceWinDialogueUI.ShowLines(
                     resistanceWinSpeaker,
                     resistanceLossDialogueLines,
-                    () => onDecisionComplete?.Invoke());
+                    CompleteResistanceLossFollowUp);
                 return;
             }
 
+            CompleteResistanceLossFollowUp();
+        }
+
+        private void CompleteResistanceLossFollowUp()
+        {
+            if (initiatingNpcInteraction != null) initiatingNpcInteraction.enabled = true;
             onDecisionComplete?.Invoke();
         }
 

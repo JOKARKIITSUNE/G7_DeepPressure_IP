@@ -8366,6 +8366,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 6596074261194501042}
     - target: {fileID: 5652981541067773880, guid: 2ea05912f9ede1e40957197f1c409fa2, type: 3}
+      propertyPath: disableAfterDialogue
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5652981541067773880, guid: 2ea05912f9ede1e40957197f1c409fa2, type: 3}
       propertyPath: onDialogueComplete.m_PersistentCalls.m_Calls.Array.size
       value: 2
       objectReference: {fileID: 0}
